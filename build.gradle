@@ -30,7 +30,7 @@ ext {
     targetSdkVersion = 27
     supportLibVersion =       "27.1.1"
     constraintLayoutVersion = "1.1.1"
-    dagger2Version =          "2.13"
+    dagger2Version =          "2.15"
     rxAndroidVersion =        "2.0.2"
     rxJava2Version =          "2.1.0"
     glideVersion =            "4.7.1"
