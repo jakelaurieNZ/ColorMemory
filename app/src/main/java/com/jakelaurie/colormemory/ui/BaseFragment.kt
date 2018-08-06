@@ -1,15 +1,10 @@
 package com.jakelaurie.colormemory.ui
 
 import android.support.annotation.CallSuper
-import android.support.v4.app.Fragment
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.DaggerFragment
 import dagger.android.support.HasSupportFragmentInjector
-import javax.inject.Inject
 
-abstract class BaseFragment: Fragment(), HasSupportFragmentInjector {
-
-    @Inject lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+abstract class BaseFragment: DaggerFragment(), HasSupportFragmentInjector {
 
     @CallSuper
     override fun onResume() {
@@ -30,6 +25,4 @@ abstract class BaseFragment: Fragment(), HasSupportFragmentInjector {
     }
 
     protected abstract fun getPresenter(): BasePresenter?
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = childFragmentInjector
 }

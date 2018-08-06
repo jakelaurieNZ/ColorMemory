@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.BaseFragment
 import com.jakelaurie.colormemory.ui.BasePresenter
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class GameFragment: DaggerFragment(), GameContract.View {
+class GameFragment: BaseFragment(), GameContract.View {
 
     @Inject lateinit var presenter: GamePresenter
 
@@ -28,7 +27,7 @@ class GameFragment: DaggerFragment(), GameContract.View {
         super.onPause()
     }
 
-//    override fun getPresenter(): BasePresenter? {
-//        return presenter
-//    }
+    override fun getPresenter(): BasePresenter? {
+        return presenter
+    }
 }

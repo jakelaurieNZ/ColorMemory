@@ -4,9 +4,8 @@ import android.os.Bundle
 import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.game.GameContract
 import com.jakelaurie.colormemory.ui.game.GameFragment
-import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : DaggerAppCompatActivity(), GameContract.Callback {
+class MainActivity : BaseActivity(), GameContract.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
