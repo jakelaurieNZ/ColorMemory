@@ -8,7 +8,7 @@ interface GameContract {
     }
 
     interface Presenter {
-
+        fun viewSelected(id: Int, position: Int)
     }
 
     interface Callback {

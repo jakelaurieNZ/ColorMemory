@@ -2,16 +2,20 @@ package com.jakelaurie.colormemory.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout
+import com.jakelaurie.colormemory.ui.game.DatasetObserver
 import com.jakelaurie.colormemory.ui.game.GameViewAdapter
+import com.jakelaurie.colormemory.ui.viewholder.GameCardItemViewHolder
 import com.jakelaurie.colormemory.util.closestDivisible
 
 class GameGridLayout @JvmOverloads constructor(context: Context,
                                                attrs: AttributeSet? = null,
                                                defStyle: Int = 0,
                                                defStyleRes: Int = 0):
-        LinearLayout(context, attrs, defStyle, defStyleRes) {
+        LinearLayout(context, attrs, defStyle, defStyleRes), DatasetObserver {
     init {
         orientation = VERTICAL
     }
@@ -21,6 +25,7 @@ class GameGridLayout @JvmOverloads constructor(context: Context,
             field = value
             removeAllViews()
             addAllViews()
+            field?.datasetObserver = this
         }
 
     private fun addAllViews() {
@@ -43,11 +48,24 @@ class GameGridLayout @JvmOverloads constructor(context: Context,
                     currentLayout = buildRow(gridSize, rowParams)
                 }
 
-                val view = it.getView(i, this)
-                currentLayout.addView(view, colParams)
+
+                val viewHolder = it.onCreateViewHolder(this)
+                it.onBindViewHolder(viewHolder, i)
+
+                currentLayout.addView(viewHolder.itemView, colParams)
                 currentColumn ++
             }
         }
+    }
+
+    override fun itemChanged(id: Int, position: Int) {
+        val viewHolder = findViewById<ViewGroup>(id)?.tag as? GameCardItemViewHolder
+
+        if(viewHolder != null) {
+            adapter?.onBindViewHolder(viewHolder, position)
+        }
+
+
     }
 
     private fun buildRow(columnCount: Int, rowParams: LayoutParams): LinearLayout {

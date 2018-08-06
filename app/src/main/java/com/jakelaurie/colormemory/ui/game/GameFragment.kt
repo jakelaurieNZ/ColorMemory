@@ -25,6 +25,9 @@ class GameFragment: BaseFragment(), GameContract.View {
 
     override fun setAdapter(gameAdapter: GameViewAdapter) {
         gameGridLayout.adapter = gameAdapter
+        gameAdapter.clickListener = { view: View, position: Int ->
+            presenter.viewSelected(view.id, position)
+        }
     }
 
     override fun getPresenter(): BasePresenter<out BaseView>? = presenter

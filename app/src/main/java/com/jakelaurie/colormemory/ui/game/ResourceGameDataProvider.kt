@@ -2,7 +2,6 @@ package com.jakelaurie.colormemory.ui.game
 
 import android.content.Context
 import android.support.annotation.ArrayRes
-import android.support.annotation.DrawableRes
 import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.domain.model.GameCard
 import java.util.*
