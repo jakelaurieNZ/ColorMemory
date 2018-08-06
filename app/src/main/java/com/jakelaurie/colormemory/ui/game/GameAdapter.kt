@@ -1,5 +1,6 @@
 package com.jakelaurie.colormemory.ui.game
 
+import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -22,6 +23,14 @@ class GameAdapter: BaseAdapter() {
 
     }
 
+    fun notifyItemsChanged(items: SparseArray<GameCard>) {
+        
+    }
+
+    fun notifyItemChanged(position: Int, item: GameCard) {
+
+    }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val viewHolder: GameCardItemViewHolder?
         var view = convertView
@@ -38,7 +47,6 @@ class GameAdapter: BaseAdapter() {
         }
 
         viewHolder?.bind(getItem(position), position) { clickedView: View, clickedPosition: Int ->
-            //Reload me --
             clickListener?.invoke(clickedView, clickedPosition)
         }
 
