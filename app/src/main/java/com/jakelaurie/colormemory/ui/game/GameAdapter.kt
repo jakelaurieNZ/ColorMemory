@@ -8,10 +8,10 @@ import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.domain.model.GameCard
 import com.jakelaurie.colormemory.ui.viewholder.ClickListener
 import com.jakelaurie.colormemory.ui.viewholder.GameCardItemViewHolder
+import javax.inject.Inject
 
-class GameAdapter: BaseAdapter() {
-    val itemCount = 16
-    var data: List<GameCard> = emptyList()
+class GameAdapter @Inject constructor(dataProvider: IGameDataProvider): BaseAdapter() {
+    private var data: List<GameCard> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -24,7 +24,7 @@ class GameAdapter: BaseAdapter() {
     }
 
     fun notifyItemsChanged(items: SparseArray<GameCard>) {
-        
+
     }
 
     fun notifyItemChanged(position: Int, item: GameCard) {

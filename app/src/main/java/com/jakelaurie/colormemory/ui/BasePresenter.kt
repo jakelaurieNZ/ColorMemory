@@ -16,17 +16,17 @@ abstract class BasePresenter<V: BaseView>: IBasePresenter<V> {
     }
 
     @CallSuper
-    fun resume() {
+    open fun resume() {
         mIsPaused = false
     }
 
     @CallSuper
-    fun pause() {
+    open fun pause() {
         mIsPaused = true
     }
 
     @CallSuper
-    fun destroy() {
+    open fun destroy() {
         mIsPaused = true
     }
 }

@@ -24,8 +24,12 @@ class GameFragment: BaseFragment(), GameContract.View {
         return view
     }
 
+    override fun setAdapter(gameAdapter: GameAdapter) {
+        gameGridLayout.adapter = gameAdapter
+    }
+
     fun constructGame() {
-        gameGridLayout.
+
     }
 
     override fun getPresenter(): BasePresenter<out BaseView>? = presenter
