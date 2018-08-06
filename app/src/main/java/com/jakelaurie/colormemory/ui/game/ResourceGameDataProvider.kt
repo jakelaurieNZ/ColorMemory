@@ -16,12 +16,14 @@ class ResourceGameDataProvider @Inject constructor(
     private var items: MutableList<GameCard> = mutableListOf()
 
     init {
-        context.resources.getIntArray(drawableArray).forEachIndexed { index, it ->
-            val item = GameCard(defaultDrawableRes, it, index)
+        val resourceArray = context.resources.obtainTypedArray(drawableArray)
+        for (i in 0..(resourceArray.length() -1)) {
+            val item = GameCard(R.drawable.card_bg, resourceArray.getResourceId(i, -1), i) //Id can be zero
             items.add(item)
             items.add(item)
         }
 
+        resourceArray.recycle()
         shuffle()
     }
 
@@ -32,8 +34,4 @@ class ResourceGameDataProvider @Inject constructor(
     override fun getItems(): List<GameCard> = items
 
     fun getItemCount() = items.size
-
-    companion object {
-        @DrawableRes private val defaultDrawableRes = R.drawable.card_bg
-    }
 }

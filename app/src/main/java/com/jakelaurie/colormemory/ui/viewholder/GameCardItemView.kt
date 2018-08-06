@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.item_game_card.view.*
 
 typealias ClickListener = ((View, Int) -> Unit)
 
-class GameCardItemViewHolder(val itemView: View) {
+class GameCardItemViewHolder(private val itemView: View) {
     fun bind(item: GameCard, position: Int, clickListener: ClickListener?) {
         Glide.with(itemView)
                 .load(item.defaultDrawableRes)

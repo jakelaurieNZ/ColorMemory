@@ -20,16 +20,11 @@ class GameFragment: BaseFragment(), GameContract.View {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_game, container, false)
         presenter.setView(this)
-        constructGame()
         return view
     }
 
-    override fun setAdapter(gameAdapter: GameAdapter) {
+    override fun setAdapter(gameAdapter: GameViewAdapter) {
         gameGridLayout.adapter = gameAdapter
-    }
-
-    fun constructGame() {
-
     }
 
     override fun getPresenter(): BasePresenter<out BaseView>? = presenter
