@@ -2,9 +2,8 @@ package com.jakelaurie.colormemory.ui
 
 import android.support.annotation.CallSuper
 import dagger.android.support.DaggerFragment
-import dagger.android.support.HasSupportFragmentInjector
 
-abstract class BaseFragment: DaggerFragment(), HasSupportFragmentInjector {
+abstract class BaseFragment: DaggerFragment(), BaseView {
 
     @CallSuper
     override fun onResume() {
@@ -24,5 +23,5 @@ abstract class BaseFragment: DaggerFragment(), HasSupportFragmentInjector {
         getPresenter()?.destroy()
     }
 
-    protected abstract fun getPresenter(): BasePresenter?
+    protected abstract fun getPresenter(): BasePresenter<out BaseView>?
 }

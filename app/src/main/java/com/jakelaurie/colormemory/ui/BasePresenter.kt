@@ -1,11 +1,36 @@
 package com.jakelaurie.colormemory.ui
 
-interface BasePresenter {
-    fun resume()
+import android.support.annotation.CallSuper
 
-    fun pause()
+abstract class BasePresenter<V: BaseView>: IBasePresenter<V> {
+    private var mView: V? = null
+    private var mIsPaused: Boolean = false
 
-    fun destroy()
+    @CallSuper
+    override fun setView(view: V) {
+        mView = view
+    }
 
-    fun setView(view: BaseView)
+    fun getView(): V? {
+        return mView
+    }
+
+    @CallSuper
+    fun resume() {
+        mIsPaused = false
+    }
+
+    @CallSuper
+    fun pause() {
+        mIsPaused = true
+    }
+
+    @CallSuper
+    fun destroy() {
+        mIsPaused = true
+    }
+}
+
+interface IBasePresenter<V: BaseView> {
+    fun setView(view: V)
 }
