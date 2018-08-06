@@ -1,6 +1,5 @@
 package com.jakelaurie.colormemory.ui.game
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,6 @@ class GameViewAdapter @Inject constructor(dataProvider: IGameDataProvider) {
 
 
     fun getView(position: Int, parent: ViewGroup): View {
-        Log.e("getView", "view")
         val viewHolder: GameCardItemViewHolder?
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_game_card, parent, false)

@@ -1,7 +1,6 @@
 package com.jakelaurie.colormemory.ui.widget
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout
@@ -55,7 +54,6 @@ class GameGridLayout @JvmOverloads constructor(context: Context,
         val layout = LinearLayout(this.context)
         layout.orientation = HORIZONTAL
         layout.weightSum = columnCount.toFloat()
-        layout.setBackgroundColor(Color.RED)
         addView(layout, rowParams)
         return layout
     }
