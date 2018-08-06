@@ -1,16 +1,12 @@
 package com.jakelaurie.colormemory
 
-import android.app.Application
 import com.jakelaurie.colormemory.di.component.DaggerAppComponent
-import com.jakelaurie.colormemory.di.module.AppModule
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class ColorApplication: Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
-                .inject(this)
+class ColorApplication: DaggerApplication() {
+    override fun applicationInjector(): AndroidInjector<out ColorApplication> {
+        return DaggerAppComponent.builder().create(this)
     }
 }
+

@@ -1,13 +1,22 @@
 package com.jakelaurie.colormemory.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.jakelaurie.colormemory.R
+import com.jakelaurie.colormemory.ui.game.GameContract
+import com.jakelaurie.colormemory.ui.game.GameFragment
+import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : DaggerAppCompatActivity(), GameContract.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        showGameFragment()
+    }
+
+    private fun showGameFragment() {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(android.R.id.content, GameFragment())
+                .commit()
     }
 }
