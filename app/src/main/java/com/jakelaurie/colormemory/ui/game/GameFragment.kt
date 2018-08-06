@@ -8,6 +8,7 @@ import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.BaseFragment
 import com.jakelaurie.colormemory.ui.BasePresenter
 import com.jakelaurie.colormemory.ui.BaseView
+import kotlinx.android.synthetic.main.fragment_game.*
 import javax.inject.Inject
 
 class GameFragment: BaseFragment(), GameContract.View {
@@ -17,8 +18,14 @@ class GameFragment: BaseFragment(), GameContract.View {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_game, container, false)
         presenter.setView(this)
-        return inflater.inflate(R.layout.fragment_game, container, false)
+        constructGame()
+        return view
+    }
+
+    fun constructGame() {
+        gameGridLayout.
     }
 
     override fun getPresenter(): BasePresenter<out BaseView>? = presenter
