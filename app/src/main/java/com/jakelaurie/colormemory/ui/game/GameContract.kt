@@ -5,10 +5,11 @@ import com.jakelaurie.colormemory.ui.BaseView
 interface GameContract {
     interface View: BaseView {
         fun setAdapter(gameAdapter: GameViewAdapter)
+        fun onGameCompleted(points: Int)
     }
 
     interface Presenter {
-        fun viewSelected(id: Int, position: Int)
+        fun viewSelected(viewId: Int, position: Int)
     }
 
     interface Callback {

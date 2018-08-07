@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.BaseFragment
 import com.jakelaurie.colormemory.ui.BasePresenter
@@ -28,6 +29,11 @@ class GameFragment: BaseFragment(), GameContract.View {
         gameAdapter.clickListener = { view: View, position: Int ->
             presenter.viewSelected(view.id, position)
         }
+    }
+
+    override fun onGameCompleted(points: Int) {
+        Toast.makeText(context, "GameCompleted, points: " + points, Toast.LENGTH_LONG).show()
+
     }
 
     override fun getPresenter(): BasePresenter<out BaseView>? = presenter

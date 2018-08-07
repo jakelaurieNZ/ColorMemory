@@ -13,22 +13,16 @@ import javax.inject.Inject
  * Adapter specifically for GameView
  * Similar to RecyclerView.Adapter with [onCreateViewHolder] and [onBindViewHolder] idioms
  */
-class GameViewAdapter @Inject constructor(dataProvider: IGameDataProvider) {
-    private var data: List<GameCard> = mutableListOf()
+class GameViewAdapter @Inject constructor() {
+    var data: List<GameCard> = mutableListOf()
 
     var clickListener: ClickListener? = null
-    var datasetObserver: DatasetObserver? = null
-
-    init {
-        data = dataProvider.getItems()
-    }
+    var dataSetObserver: DatasetObserver? = null
 
     fun getItemCount(): Int = data.size
 
-    fun toggleItemSelected(id: Int, position: Int) {
-        data[position].selected = !data[position].selected
-
-        datasetObserver?.itemChanged(id, position)
+    fun notifyItemChanged(id: Int, position: Int) {
+        dataSetObserver?.itemChanged(id, position)
     }
 
     fun onCreateViewHolder(parent: ViewGroup): GameCardItemViewHolder {

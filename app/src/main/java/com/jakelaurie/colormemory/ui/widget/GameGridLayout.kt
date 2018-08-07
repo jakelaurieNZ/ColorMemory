@@ -2,7 +2,6 @@ package com.jakelaurie.colormemory.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout
@@ -25,7 +24,7 @@ class GameGridLayout @JvmOverloads constructor(context: Context,
             field = value
             removeAllViews()
             addAllViews()
-            field?.datasetObserver = this
+            field?.dataSetObserver = this
         }
 
     private fun addAllViews() {
