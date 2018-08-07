@@ -9,7 +9,7 @@ interface GameContract {
     }
 
     interface Presenter {
-        fun viewSelected(viewId: Int, position: Int)
+
     }
 
     interface Callback {

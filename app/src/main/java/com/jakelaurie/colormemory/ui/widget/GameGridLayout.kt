@@ -47,7 +47,6 @@ class GameGridLayout @JvmOverloads constructor(context: Context,
                     currentLayout = buildRow(gridSize, rowParams)
                 }
 
-
                 val viewHolder = it.onCreateViewHolder(this)
                 it.onBindViewHolder(viewHolder, i)
 

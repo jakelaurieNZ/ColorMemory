@@ -33,7 +33,19 @@ fun ObjectAnimator.addEndListener(end: (() -> Unit)) {
 }
 
 fun View.setRandomBackground() {
-    val rnd = Random()
-    val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+    val rand = Random()
+    val color = Color.argb(
+            255,
+            rand.nextInt(256),
+            rand.nextInt(256),
+            rand.nextInt(256)
+    )
     setBackgroundColor(color)
 }
+
+val <T> List<T>.first: T
+    get() = this[0]
+
+val <T> List<T>.second: T
+    get() = this[1]
+

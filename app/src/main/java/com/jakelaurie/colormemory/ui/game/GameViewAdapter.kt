@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.domain.model.GameCard
-import com.jakelaurie.colormemory.ui.viewholder.ClickListener
 import com.jakelaurie.colormemory.ui.viewholder.GameCardItemViewHolder
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 /**
@@ -16,8 +16,12 @@ import javax.inject.Inject
 class GameViewAdapter @Inject constructor() {
     var data: List<GameCard> = mutableListOf()
 
-    var clickListener: ClickListener? = null
     var dataSetObserver: DatasetObserver? = null
+    var clickSubject: PublishSubject<Selection>? = null
+
+    init {
+        clickSubject = PublishSubject.create()
+    }
 
     fun getItemCount(): Int = data.size
 
@@ -36,7 +40,7 @@ class GameViewAdapter @Inject constructor() {
 
     fun onBindViewHolder(viewHolder: GameCardItemViewHolder, position: Int) {
         viewHolder.bind(data[position], position) { clickedView: View, index: Int ->
-            clickListener?.invoke(clickedView, index)
+            clickSubject?.onNext(Selection(clickedView.id, data[position].pairId, position))
         }
     }
 }

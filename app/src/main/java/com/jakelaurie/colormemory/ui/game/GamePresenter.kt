@@ -1,8 +1,12 @@
 package com.jakelaurie.colormemory.ui.game
 
-import android.os.Handler
 import com.jakelaurie.colormemory.domain.model.GameCard
 import com.jakelaurie.colormemory.ui.BasePresenter
+import com.jakelaurie.colormemory.util.first
+import com.jakelaurie.colormemory.util.second
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.subjects.PublishSubject
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -13,85 +17,75 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter, da
         BasePresenter<GameContract.View>(), GameContract.Presenter {
 
     private val data: List<GameCard> = dataProvider.getItems()
-    private val currentSelections: MutableList<Selection> = mutableListOf()
     private val actionDelayTime = 1000L
     private var currentPoints = 0
     private var currentMatches = 0
+    private lateinit var gameSubject: PublishSubject<Selection>
+    private var pairSize = 2
 
     override fun resume() {
         super.resume()
         adapter.data = data
         getView()?.setAdapter(adapter)
+
+        gameSubject = PublishSubject.create()
+
+        subscribeToAdapterChanges()
+        subscribeToGameLogic()
     }
 
-    override fun viewSelected(viewId: Int, position: Int) {
-        val selectedItem = data[position]
-        if(selectedItem.selected) {
-            return //can't de-select a selected item
-        }
-
-        when(currentSelections.size) {
-            0 -> {
-                currentSelections.add(0, Selection(viewId, selectedItem.pairId, position))
-                setItemSelected(position, true)
-                adapter.notifyItemChanged(viewId, position)
+    private fun subscribeToAdapterChanges() {
+        //Handles selection
+        adapter.clickSubject?.subscribe {
+            //Set item is selected, notify adapter to change state
+            if(data[it.position].selected) {
+                return@subscribe
             }
-            1 -> {
-                currentSelections.add(1, Selection(viewId, selectedItem.pairId, position))
-                setItemSelected(position, true)
-                adapter.notifyItemChanged(viewId, position)
 
-                if(checkMatch(currentSelections)) {
-                    Handler().postDelayed({
+            //2nd Observable so we can impose 'blocking' logic above
+            gameSubject.onNext(it)
+            setItemSelected(it.position, true)
+            adapter.notifyItemChanged(it.viewId, it.position)
+        }
+    }
+
+    private fun subscribeToGameLogic() {
+        //Handles game logic
+        gameSubject.buffer(pairSize)
+                ?.delay(actionDelayTime, TimeUnit.MILLISECONDS)
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribeOn(AndroidSchedulers.mainThread())
+                ?.subscribe {
+                    if (checkMatch(it)) {
                         onMatchSuccess()
-
-                        setPairSolved(currentSelections[0].position, currentSelections[1].position)
-
-                        currentSelections[0].let {
-                            adapter.notifyItemChanged(it.viewId, it.position)
-                        }
-
-                        currentSelections[1].let {
-                            adapter.notifyItemChanged(it.viewId, it.position)
-                        }
-
-                        currentSelections.clear()
-
-                    }, actionDelayTime)
-                } else {
-                    //No match found
-                    //De-select pair
-                    //Minus one point
-                    Handler().postDelayed({
+                        setPairSolved(it)
+                    } else {
                         onMatchFailure()
+                        setItemSelected(it.first.position, false)
+                        setItemSelected(it.second.position, false)
+                    }
 
-                        currentSelections[0].let {
-                            setItemSelected(it.position, false)
-                            adapter.notifyItemChanged(it.viewId, it.position)
-                        }
-
-                        currentSelections[1].let {
-                            setItemSelected(it.position, false)
-                            adapter.notifyItemChanged(it.viewId, it.position)
-                        }
-
-                        //Clear selection
-                        currentSelections.clear()
-                    }, actionDelayTime)
+                    adapter.notifyItemChanged(it.first.viewId, it.first.position)
+                    adapter.notifyItemChanged(it.second.viewId, it.second.position)
                 }
-            }
-        }
     }
 
     private fun setItemSelected(position: Int, selected: Boolean) {
         data[position].selected = selected
     }
 
-    private fun setPairSolved(position: Int, pairPosition: Int) {
-        data[position].solved = true
-        data[pairPosition].solved = true
+    /**
+     * Set both items solved
+     * Doesn't notify
+     */
+    private fun setPairSolved(pair: List<Selection>) {
+        data[pair.first.position].solved = true
+        data[pair.second.position].solved = true
     }
 
+    /**
+     * Check both items from selection are from the same pair
+     */
     private fun checkMatch(selections: List<Selection>): Boolean {
         return selections[0].pairId == selections[1].pairId
     }
@@ -104,8 +98,7 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter, da
         currentPoints += 2
         currentMatches ++
 
-        //Completed game will always be data.size /2
-        if(currentMatches == data.size / 2) {
+        if(currentMatches == data.size / pairSize) {
             getView()?.onGameCompleted(currentPoints)
         }
     }
