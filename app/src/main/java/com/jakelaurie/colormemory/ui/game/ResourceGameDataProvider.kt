@@ -17,16 +17,15 @@ class ResourceGameDataProvider @Inject constructor(
     init {
         val resourceArray = context.resources.obtainTypedArray(drawableArray)
         for (i in 0..(resourceArray.length() -1)) {
-            val item = GameCard(R.drawable.card_bg, resourceArray.getResourceId(i, -1), i) //Id can be zero
-            items.add(item)
-            items.add(item)
+            items.add(GameCard(R.drawable.card_bg, resourceArray.getResourceId(i, -1), i))
+            items.add(GameCard(R.drawable.card_bg, resourceArray.getResourceId(i, -1), i))
         }
 
         resourceArray.recycle()
         shuffle()
     }
 
-    fun shuffle() {
+    private fun shuffle() {
         items.shuffle(randomProvider)
     }
 

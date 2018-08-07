@@ -1,6 +1,5 @@
 package com.jakelaurie.colormemory.ui.game
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import javax.inject.Inject
  * Similar to RecyclerView.Adapter with [onCreateViewHolder] and [onBindViewHolder] idioms
  */
 class GameViewAdapter @Inject constructor(dataProvider: IGameDataProvider) {
-    private var data: List<GameCard> = emptyList()
+    private var data: List<GameCard> = mutableListOf()
 
     var clickListener: ClickListener? = null
     var datasetObserver: DatasetObserver? = null
@@ -27,9 +26,7 @@ class GameViewAdapter @Inject constructor(dataProvider: IGameDataProvider) {
     fun getItemCount(): Int = data.size
 
     fun toggleItemSelected(id: Int, position: Int) {
-        data[position].run {
-            this.selected = !selected
-        }
+        data[position].selected = !data[position].selected
 
         datasetObserver?.itemChanged(id, position)
     }
@@ -45,7 +42,6 @@ class GameViewAdapter @Inject constructor(dataProvider: IGameDataProvider) {
 
     fun onBindViewHolder(viewHolder: GameCardItemViewHolder, position: Int) {
         viewHolder.bind(data[position], position) { clickedView: View, index: Int ->
-            Log.e("this", "bind item")
             clickListener?.invoke(clickedView, index)
         }
     }

@@ -64,8 +64,6 @@ class GameGridLayout @JvmOverloads constructor(context: Context,
         if(viewHolder != null) {
             adapter?.onBindViewHolder(viewHolder, position)
         }
-
-
     }
 
     private fun buildRow(columnCount: Int, rowParams: LayoutParams): LinearLayout {
