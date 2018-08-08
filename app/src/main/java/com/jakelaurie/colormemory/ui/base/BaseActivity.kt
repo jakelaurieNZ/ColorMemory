@@ -1,4 +1,4 @@
-package com.jakelaurie.colormemory.ui
+package com.jakelaurie.colormemory.ui.base
 
 import dagger.android.support.DaggerAppCompatActivity
 

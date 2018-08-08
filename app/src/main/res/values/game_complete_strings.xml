@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="game_complete_title_standard">Game complete</string>
+    <string name="game_complete_title_high_score">High score</string>
+    <string name="game_complete_user_score">Your score:</string>
+    <string name="game_complete_name_prompt">Enter your name</string>
+
+    <string name="game_complete_highscore_button_title">High scores</string>
+    <string name="game_complete_highscore_entered_button_title">Enter</string>
+    <string name="game_complete_close_button_title">Close</string>
+
+    <string name="game_complete_enter_name_error">Please enter a valid name</string>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="@dimen/material_dialog_width"
+    android:paddingStart="@dimen/material_dialog_padding_start"
+    android:paddingEnd="@dimen/material_dialog_padding_end"
+    android:paddingBottom="@dimen/material_dialog_button_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/material_dialog_title_padding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAppearance="@style/H6"
+        android:id="@+id/gameCompleteTitle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/gameCompleteTitle"
+        android:textAppearance="@style/Subtitle2"
+        android:text="@string/game_complete_user_score"
+        android:id="@+id/gameCompleteYourScoreTitle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_medium"
+        app:layout_constraintStart_toEndOf="@id/gameCompleteYourScoreTitle"
+        app:layout_constraintTop_toTopOf="@id/gameCompleteYourScoreTitle"
+        app:layout_constraintTop_toBottomOf="@id/gameCompleteYourScoreTitle"
+        android:textAppearance="@style/body"
+        android:id="@+id/gameCompleteYourScore"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gameCompleteYourScoreTitle"
+        android:id="@+id/gameCompleteEnterScoreLayout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/gameCompleteEnterScoreInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:inputType="text"
+            android:hint="@string/game_complete_name_prompt" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/gameCompleteContinueButton"
+        app:layout_constraintTop_toBottomOf="@id/gameCompleteEnterScoreLayout"
+        android:layout_marginEnd="@dimen/material_dialog_button_margin"
+        android:background="?attr/selectableItemBackground"
+        android:textAppearance="@style/button"
+        android:text="@string/game_complete_close_button_title"
+        android:id="@+id/gameCompleteCloseButton"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gameCompleteEnterScoreLayout"
+        android:background="?attr/selectableItemBackground"
+        android:textAppearance="@style/button"
+        android:id="@+id/gameCompleteContinueButton"/>
+
+</android.support.constraint.ConstraintLayout>
+

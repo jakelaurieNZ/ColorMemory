@@ -1,6 +1,7 @@
-package com.jakelaurie.colormemory.ui
+package com.jakelaurie.colormemory.ui.base
 
 import android.support.annotation.CallSuper
+import com.jakelaurie.colormemory.ui.BaseView
 
 abstract class BasePresenter<V: BaseView>: IBasePresenter<V> {
     private var mView: V? = null

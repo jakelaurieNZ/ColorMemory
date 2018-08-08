@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="material_dialog_width">280dp</dimen>
+    <dimen name="material_dialog_button_margin">8dp</dimen>
+    <dimen name="material_dialog_title_padding">16dp</dimen>
+    <dimen name="material_dialog_padding_start">24dp</dimen>
+    <dimen name="material_dialog_padding_end">16dp</dimen>
+</resources>

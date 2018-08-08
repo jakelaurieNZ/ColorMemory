@@ -1,6 +1,7 @@
 package com.jakelaurie.colormemory.ui.game
 
 import com.jakelaurie.colormemory.di.module.GameModule
+import com.jakelaurie.colormemory.ui.game.complete.GameCompleteDialogFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -8,4 +9,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class GameFragmentProvider {
     @ContributesAndroidInjector(modules = [GameModule::class])
     abstract fun providesGameFragment(): GameFragment
+
+    @ContributesAndroidInjector
+    abstract fun providesGameCompleteDialogFragment(): GameCompleteDialogFragment
 }

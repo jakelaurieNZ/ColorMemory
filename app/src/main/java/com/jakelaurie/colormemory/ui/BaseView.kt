@@ -1,4 +1,3 @@
 package com.jakelaurie.colormemory.ui
 
-interface BaseView {
-}
+interface BaseView

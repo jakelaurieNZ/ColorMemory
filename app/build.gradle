@@ -27,26 +27,36 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
     //Support
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.ext.constraintLayoutVersion}"
+
     //Dagger2
     implementation "com.google.dagger:dagger-android-support:${rootProject.ext.dagger2Version}"
     kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger2Version}"
     kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.dagger2Version}"
+
     //RxJava RxAndroid
     implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJava2Version}"
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroidVersion}"
+
+    //RxBindings
+    implementation "com.jakewharton.rxbinding2:rxbinding:${rootProject.ext.rxBindingsVersion}"
+
     //Glide
     implementation "com.github.bumptech.glide:glide:${rootProject.ext.glideVersion}"
     annotationProcessor "com.github.bumptech.glide:compiler:${rootProject.ext.glideVersion}"
+
     //Test
     testImplementation "junit:junit:${rootProject.ext.junitVersion}"
+
     //AndroidTest
     androidTestImplementation "com.android.support.test:runner:${rootProject.ext.testRunnerVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${rootProject.ext.testEspressoVersion}"

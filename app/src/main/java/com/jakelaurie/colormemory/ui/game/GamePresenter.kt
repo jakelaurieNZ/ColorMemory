@@ -1,7 +1,7 @@
 package com.jakelaurie.colormemory.ui.game
 
 import com.jakelaurie.colormemory.domain.model.GameCard
-import com.jakelaurie.colormemory.ui.BasePresenter
+import com.jakelaurie.colormemory.ui.base.BasePresenter
 import com.jakelaurie.colormemory.util.first
 import com.jakelaurie.colormemory.util.second
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -98,7 +98,7 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter, da
         currentPoints += 2
         currentMatches ++
 
-        if(currentMatches == data.size / pairSize) {
+        if(currentMatches == 1) { // data.size / pairSize) {
             getView()?.onGameCompleted(currentPoints)
         }
     }

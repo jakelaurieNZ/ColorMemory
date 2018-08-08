@@ -13,6 +13,6 @@ interface GameContract {
     }
 
     interface Callback {
-
+        fun onGameComplete(points: Int)
     }
 }
