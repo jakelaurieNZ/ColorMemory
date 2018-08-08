@@ -33,6 +33,7 @@ ext {
     dagger2Version =          "2.15"
     rxAndroidVersion =        "2.0.2"
     rxJava2Version =          "2.1.0"
+    roomVersion =             "1.1.1"
     rxBindingsVersion =       "2.1.1"
     glideVersion =            "4.7.1"
 

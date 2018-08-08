@@ -50,6 +50,11 @@ dependencies {
     //RxBindings
     implementation "com.jakewharton.rxbinding2:rxbinding:${rootProject.ext.rxBindingsVersion}"
 
+    //Room
+    implementation "android.arch.persistence.room:runtime:${rootProject.ext.roomVersion}"
+    implementation "android.arch.persistence.room:rxjava2:${rootProject.ext.roomVersion}"
+    kapt "android.arch.persistence.room:compiler:${rootProject.ext.roomVersion}"
+
     //Glide
     implementation "com.github.bumptech.glide:glide:${rootProject.ext.glideVersion}"
     annotationProcessor "com.github.bumptech.glide:compiler:${rootProject.ext.glideVersion}"
