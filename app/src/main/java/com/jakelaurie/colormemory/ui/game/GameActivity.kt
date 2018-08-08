@@ -1,13 +1,11 @@
-package com.jakelaurie.colormemory.ui
+package com.jakelaurie.colormemory.ui.game
 
 import android.os.Bundle
 import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.base.BaseActivity
-import com.jakelaurie.colormemory.ui.game.GameContract
-import com.jakelaurie.colormemory.ui.game.GameFragment
 import com.jakelaurie.colormemory.ui.game.complete.GameCompleteDialogFragment
 
-class MainActivity : BaseActivity(), GameContract.Callback {
+class GameActivity : BaseActivity(), GameContract.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

@@ -3,7 +3,6 @@ package com.jakelaurie.colormemory.ui.base
 import android.content.Context
 import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
-import com.jakelaurie.colormemory.ui.BaseView
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.AndroidSupportInjection

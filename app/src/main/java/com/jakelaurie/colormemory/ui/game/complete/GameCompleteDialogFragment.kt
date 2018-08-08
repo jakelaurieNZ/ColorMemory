@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jakelaurie.colormemory.R
-import com.jakelaurie.colormemory.ui.BaseView
+import com.jakelaurie.colormemory.ui.base.BaseView
 import com.jakelaurie.colormemory.ui.base.BaseDialogFragment
 import com.jakelaurie.colormemory.ui.base.BasePresenter
 import com.jakewharton.rxbinding2.widget.RxTextView

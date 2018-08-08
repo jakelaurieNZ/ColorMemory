@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.base.BaseFragment
 import com.jakelaurie.colormemory.ui.base.BasePresenter
-import com.jakelaurie.colormemory.ui.BaseView
+import com.jakelaurie.colormemory.ui.base.BaseView
 import kotlinx.android.synthetic.main.fragment_game.*
 import javax.inject.Inject
 

@@ -1,6 +1,6 @@
 package com.jakelaurie.colormemory.ui.game.complete
 
-import com.jakelaurie.colormemory.ui.BaseView
+import com.jakelaurie.colormemory.ui.base.BaseView
 
 interface GameCompleteContract {
     interface View: BaseView {
