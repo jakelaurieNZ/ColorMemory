@@ -9,7 +9,7 @@ import io.reactivex.Flowable
 
 @Dao
 interface ScoreDAO {
-    @Query("SELECT * FROM score")
+    @Query("SELECT * FROM score ORDER BY score DESC LIMIT 10")
     fun queryScores(): Flowable<List<Score>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

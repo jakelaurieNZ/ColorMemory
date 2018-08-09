@@ -8,7 +8,7 @@ import java.util.*
 
 class HighscoreViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(item: Score, position: Int) {
-        itemView.itemHighScoreRank.text = String.format(Locale.getDefault(), "#%d", position)
+        itemView.itemHighScoreRank.text = String.format(Locale.getDefault(), "#%d", position + 1)
         itemView.itemHighScoreName.text = item.playerName
         itemView.itemHighScoreScore.text = String.format(Locale.getDefault(), "%d", item.score)
     }

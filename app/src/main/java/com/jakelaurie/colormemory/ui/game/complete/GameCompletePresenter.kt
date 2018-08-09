@@ -1,38 +1,71 @@
 package com.jakelaurie.colormemory.ui.game.complete
 
-import android.util.Log
 import com.jakelaurie.colormemory.data.database.ScoreDAO
 import com.jakelaurie.colormemory.model.Score
 import com.jakelaurie.colormemory.ui.base.BasePresenter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableObserver
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.experimental.*
 import java.util.*
 import javax.inject.Inject
 
-class GameCompletePresenter @Inject constructor(val scoreDAO: ScoreDAO):
+class GameCompletePresenter @Inject constructor(private val scoreDAO: ScoreDAO):
         BasePresenter<GameCompleteContract.View>(), GameCompleteContract.Presenter {
 
     var points: Int = 0
 
+    private var scoreObservable: DisposableObserver<List<Score>>? = null
+
     override fun resume() {
         super.resume()
-        getView()?.displayPoints(points, isHighScore(points))
-        scoreDAO.queryScores().subscribe {
-            Log.e("tt", "" + it.size + " SCORES")
+
+        val observable = object: DisposableObserver<List<Score>>() {
+            override fun onComplete() {
+                //Do nothing
+            }
+
+            override fun onNext(it: List<Score>) {
+                if(!isPaused()) {
+                    calculateScore(points, it)
+                }
+            }
+
+            override fun onError(e: Throwable) {
+                if(!isPaused()) {
+                    calculateScore(points, null)
+                }
+            }
         }
+
+        scoreDAO.queryScores()
+                .toObservable()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observable)
+
+        scoreObservable = observable
     }
 
-    private fun isHighScore(points: Int): Boolean {
-        return true
+    private fun calculateScore(points: Int, scores: List<Score>?) {
+        getView()?.displayPoints(points, isHighScore(points, scores))
+    }
+
+    private fun isHighScore(points: Int, scores: List<Score>?): Boolean {
+        //If our score is higher than the last score, is high
+        return when(scores != null && scores.isNotEmpty()) {
+            true -> points > scores?.last()?.score?: 0
+            else -> true
+        }
     }
 
     override fun onNameEntered(value: String) {
         if(value.isNotEmpty()) {
-            //TODO: abstract this?
             val score = Score(UUID.randomUUID().toString())
             score.playerName = value
             score.score = points
 
-            async(CommonPool) {
+            launch(CommonPool) {
                 scoreDAO.addScore(score)
             }
 
@@ -40,6 +73,15 @@ class GameCompletePresenter @Inject constructor(val scoreDAO: ScoreDAO):
             getView()?.onHighscoreAdded()
         } else {
             getView()?.onNameError()
+        }
+    }
+
+    override fun destroy() {
+        super.destroy()
+        scoreObservable?.let {
+            if(!it.isDisposed) {
+                it.dispose()
+            }
         }
     }
 }

@@ -38,6 +38,10 @@ class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.Vie
         textChangedDisposable = RxTextView.textChanges(gameCompleteEnterScoreInput).subscribe {
             gameCompleteEnterScoreLayout.error = null
         }
+
+        gameCompleteCloseButton.setOnClickListener {
+            dismiss()
+        }
     }
 
     override fun onDestroy() {
@@ -59,12 +63,15 @@ class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.Vie
             gameCompleteContinueButton.setOnClickListener {
                 presenter.onNameEntered(gameCompleteEnterScoreInput.text.toString())
             }
+            gameCompleteEnterScoreLayout.visibility = View.VISIBLE
         } else {
             gameCompleteTitle.setText(R.string.game_complete_title_standard)
             gameCompleteContinueButton.setText(R.string.game_complete_highscore_button_title)
             gameCompleteContinueButton.setOnClickListener {
+                dismiss()
                 getCallback()?.showHighscores()
             }
+            gameCompleteEnterScoreLayout.visibility = View.GONE
         }
     }
 
@@ -74,6 +81,7 @@ class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.Vie
     }
 
     override fun onHighscoreAdded() {
+        dismiss()
         getCallback()?.showHighscores()
     }
 

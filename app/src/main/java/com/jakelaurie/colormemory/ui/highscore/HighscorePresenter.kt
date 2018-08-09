@@ -18,7 +18,7 @@ class HighscorePresenter @Inject constructor(private val adapter: HighscoreAdapt
 
         val scoreObservable = object: DisposableObserver<List<Score>>() {
             override fun onComplete() {
-                //Shouldn't get called as we are using flowable
+                //Not called as the source is Flowable
             }
 
             override fun onNext(it: List<Score>) {
