@@ -22,7 +22,9 @@ class HighscorePresenter @Inject constructor(private val adapter: HighscoreAdapt
             }
 
             override fun onNext(it: List<Score>) {
-                adapter.data = it
+                if(!isPaused()) {
+                    adapter.data = it
+                }
             }
 
             override fun onError(e: Throwable) {

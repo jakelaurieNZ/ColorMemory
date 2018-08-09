@@ -5,6 +5,7 @@ import com.jakelaurie.colormemory.ui.base.BaseView
 interface GameContract {
     interface View: BaseView {
         fun setAdapter(gameAdapter: GameViewAdapter)
+        fun onScoreChanged(points: Int)
         fun onGameCompleted(points: Int)
     }
 
@@ -14,5 +15,6 @@ interface GameContract {
 
     interface Callback {
         fun onGameComplete(points: Int)
+        fun showHighscores()
     }
 }

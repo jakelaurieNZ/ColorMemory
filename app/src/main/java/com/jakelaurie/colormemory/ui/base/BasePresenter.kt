@@ -29,6 +29,8 @@ abstract class BasePresenter<V: BaseView>: IBasePresenter<V> {
     open fun destroy() {
         mIsPaused = true
     }
+
+    fun isPaused(): Boolean = mIsPaused
 }
 
 interface IBasePresenter<V: BaseView> {

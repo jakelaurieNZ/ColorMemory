@@ -10,6 +10,7 @@ import com.jakelaurie.colormemory.ui.base.BaseFragment
 import com.jakelaurie.colormemory.ui.base.BasePresenter
 import com.jakelaurie.colormemory.ui.base.BaseView
 import kotlinx.android.synthetic.main.fragment_game.*
+import java.util.*
 import javax.inject.Inject
 
 class GameFragment: BaseFragment(), GameContract.View {
@@ -19,9 +20,15 @@ class GameFragment: BaseFragment(), GameContract.View {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_game, container, false)
+        return inflater.inflate(R.layout.fragment_game, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         presenter.setView(this)
-        return view
+        gameFragmentActionbarHighscoreButton.setOnClickListener {
+            getCallback()?.showHighscores()
+        }
     }
 
     override fun onAttach(context: Context?) {
@@ -35,6 +42,10 @@ class GameFragment: BaseFragment(), GameContract.View {
 
     override fun onGameCompleted(points: Int) {
         getCallback()?.onGameComplete(points)
+    }
+
+    override fun onScoreChanged(points: Int) {
+        gameFragmentActionbarCurrentScore.text = getString(R.string.score_format, points)
     }
 
     private fun getCallback(): GameContract.Callback? {

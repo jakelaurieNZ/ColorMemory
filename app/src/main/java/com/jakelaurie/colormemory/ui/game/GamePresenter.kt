@@ -32,6 +32,8 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter, da
 
         subscribeToAdapterChanges()
         subscribeToGameLogic()
+
+        getView()?.onScoreChanged(currentPoints)
     }
 
     private fun subscribeToAdapterChanges() {
@@ -101,6 +103,8 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter, da
         if(currentMatches == 1) { // data.size / pairSize) {
             getView()?.onGameCompleted(currentPoints)
         }
+
+        getView()?.onScoreChanged(currentPoints)
     }
 
     /**
@@ -108,6 +112,8 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter, da
      */
     private fun onMatchFailure() {
         currentPoints -= 1
+
+        getView()?.onScoreChanged(currentPoints)
     }
 }
 

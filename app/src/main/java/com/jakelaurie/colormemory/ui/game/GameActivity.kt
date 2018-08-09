@@ -29,8 +29,8 @@ class GameActivity : BaseActivity(), GameContract.Callback, GameCompleteContract
     override fun showHighscores() {
         supportFragmentManager
                 .beginTransaction()
+                .setCustomAnimations(R.anim.modal_up, 0, 0, R.anim.modal_down)
                 .addToBackStack(HighscoreFragment::javaClass.name)
-                .setCustomAnimations(R.anim.modal_up, R.anim.modal_down)
                 .add(android.R.id.content, HighscoreFragment())
                 .commit()
     }
