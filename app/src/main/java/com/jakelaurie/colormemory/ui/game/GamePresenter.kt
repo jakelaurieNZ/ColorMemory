@@ -104,7 +104,7 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter,
         currentPoints += 2
         currentMatches ++
 
-        if(currentMatches == 1) { // data.size / pairSize) {
+        if(currentMatches == data.size / pairSize) {
             getView()?.onGameCompleted(currentPoints)
         }
 
