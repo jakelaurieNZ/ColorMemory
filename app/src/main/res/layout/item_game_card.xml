@@ -4,8 +4,7 @@
     android:layout_height="0dp"
     android:clickable="true"
     android:focusable="true"
-    android:layout_gravity="fill_vertical"
-    android:background="?attr/selectableItemBackground">
+    android:layout_gravity="fill_vertical">
 
     <ImageView
         android:layout_width="match_parent"

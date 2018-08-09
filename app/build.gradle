@@ -68,7 +68,4 @@ dependencies {
     //AndroidTest
     androidTestImplementation "com.android.support.test:runner:${rootProject.ext.testRunnerVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${rootProject.ext.testEspressoVersion}"
-
-
-
 }
