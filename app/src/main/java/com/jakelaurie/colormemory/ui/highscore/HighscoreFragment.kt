@@ -28,6 +28,10 @@ class HighscoreFragment: BaseFragment(), HighscoreContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        highscoreFragmentActionbarClose.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
+
         context?.let {
             highScoreRecyclerView.layoutManager = LinearLayoutManager(it)
             highScoreRecyclerView.addItemDecoration(RecyclerItemDecoration(it))

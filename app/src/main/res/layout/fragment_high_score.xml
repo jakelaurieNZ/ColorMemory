@@ -5,10 +5,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryLight">
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:elevation="@dimen/action_bar_elevation"
+        android:background="@color/colorPrimary"
+        android:id="@+id/highscoreFragmentActionbar">
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/margin_x_default"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            android:id="@+id/highscoreFragmentActionbarClose"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/highscoreFragmentActionbarClose"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/margin_x_default"
+            android:layout_marginEnd="@dimen/margin_x_default"
+            android:lines="1"
+            android:textAlignment="center"
+            android:textAppearance="@style/H6"
+            android:textColor="@color/colorAccentSecondary"
+            android:text="@string/high_scores_title"
+            android:id="@+id/gameFragmentActionbarCurrentScore"/>
+
+    </android.support.constraint.ConstraintLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/highscoreFragmentActionbar"
         android:paddingBottom="@dimen/margin_y_default"
         android:paddingTop="@dimen/margin_y_default"
         android:id="@+id/highscoreHeader">

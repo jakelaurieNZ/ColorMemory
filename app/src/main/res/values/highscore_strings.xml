@@ -3,4 +3,5 @@
     <string name="high_score_rank_title">Rank</string>
     <string name="high_score_name_title">Name</string>
     <string name="high_score_points_title">Points</string>
+    <string name="high_scores_title">Top 10 high scores</string>
 </resources>
