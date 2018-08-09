@@ -14,9 +14,24 @@ import javax.inject.Inject
  * Similar to RecyclerView.Adapter with [onCreateViewHolder] and [onBindViewHolder] idioms
  */
 class GameViewAdapter @Inject constructor() {
+    private var hasPendingDataChange = false
+
     var data: List<GameCard> = mutableListOf()
+        set(value) {
+            field = value
+            hasPendingDataChange = dataSetObserver == null
+            dataSetObserver?.invalidateData()
+        }
 
     var dataSetObserver: DatasetObserver? = null
+        set(value) {
+            field = value
+            if(hasPendingDataChange) {
+                field?.invalidateData()
+                hasPendingDataChange = false
+            }
+        }
+
     var clickSubject: PublishSubject<Selection>? = null
 
     init {
@@ -39,7 +54,7 @@ class GameViewAdapter @Inject constructor() {
     }
 
     fun onBindViewHolder(viewHolder: GameCardItemViewHolder, position: Int) {
-        viewHolder.bind(data[position], position) { clickedView: View, index: Int ->
+        viewHolder.bind(data[position], position) { clickedView: View, _: Int ->
             clickSubject?.onNext(Selection(clickedView.id, data[position].pairId, position))
         }
     }
@@ -47,4 +62,5 @@ class GameViewAdapter @Inject constructor() {
 
 interface DatasetObserver {
     fun itemChanged(id: Int, position: Int)
+    fun invalidateData()
 }

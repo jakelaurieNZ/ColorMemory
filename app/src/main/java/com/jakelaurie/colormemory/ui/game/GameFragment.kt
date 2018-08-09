@@ -1,6 +1,5 @@
 package com.jakelaurie.colormemory.ui.game
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +8,12 @@ import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.base.BaseFragment
 import com.jakelaurie.colormemory.ui.base.BasePresenter
 import com.jakelaurie.colormemory.ui.base.BaseView
+import com.jakelaurie.colormemory.ui.game.complete.GameCompleteContract
+import com.jakelaurie.colormemory.ui.game.complete.GameCompleteDialogFragment
 import kotlinx.android.synthetic.main.fragment_game.*
-import java.util.*
 import javax.inject.Inject
 
-class GameFragment: BaseFragment(), GameContract.View {
+class GameFragment: BaseFragment(), GameContract.View, GameCompleteContract.Callback  {
 
     @Inject lateinit var presenter: GamePresenter
 
@@ -31,17 +31,14 @@ class GameFragment: BaseFragment(), GameContract.View {
         }
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        getCallback()?.onGameComplete(69)
-    }
-
     override fun setAdapter(gameAdapter: GameViewAdapter) {
         gameGridLayout.adapter = gameAdapter
     }
 
     override fun onGameCompleted(points: Int) {
-        getCallback()?.onGameComplete(points)
+        val dialog = GameCompleteDialogFragment.newInstance(points)
+        dialog.setTargetFragment(this, this.hashCode())
+        dialog.show(fragmentManager, GameCompleteDialogFragment::class.java.simpleName)
     }
 
     override fun onScoreChanged(points: Int) {
@@ -50,6 +47,14 @@ class GameFragment: BaseFragment(), GameContract.View {
 
     private fun getCallback(): GameContract.Callback? {
         return context as? GameContract.Callback
+    }
+
+    override fun showHighscores() {
+        getCallback()?.showHighscores()
+    }
+
+    override fun dialogDismissed() {
+        presenter.newGame()
     }
 
     override fun getPresenter(): BasePresenter<out BaseView>? = presenter

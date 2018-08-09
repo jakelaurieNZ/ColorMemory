@@ -22,8 +22,6 @@ class GameGridLayout @JvmOverloads constructor(context: Context,
     var adapter: GameViewAdapter? = null
         set(value) {
             field = value
-            removeAllViews()
-            addAllViews()
             field?.dataSetObserver = this
         }
 
@@ -62,6 +60,11 @@ class GameGridLayout @JvmOverloads constructor(context: Context,
         if(viewHolder != null) {
             adapter?.onBindViewHolder(viewHolder, position)
         }
+    }
+
+    override fun invalidateData() {
+        removeAllViews()
+        addAllViews()
     }
 
     private fun buildRow(columnCount: Int, rowParams: LayoutParams): LinearLayout {

@@ -12,24 +12,26 @@ class ResourceGameDataProvider @Inject constructor(
         @ArrayRes drawableArray: Int,
         private val randomProvider: Random): IGameDataProvider {
 
-    private var items: MutableList<GameCard> = mutableListOf()
+    private var resources: Array<Int> = emptyArray()
 
     init {
         val resourceArray = context.resources.obtainTypedArray(drawableArray)
-        for (i in 0..(resourceArray.length() -1)) {
-            items.add(GameCard(R.drawable.card_bg, resourceArray.getResourceId(i, -1), i))
-            items.add(GameCard(R.drawable.card_bg, resourceArray.getResourceId(i, -1), i))
+
+        resources = Array(resourceArray.length()) {
+            resourceArray.getResourceId(it, -1)
         }
 
         resourceArray.recycle()
-        shuffle()
     }
 
-    private fun shuffle() {
-        items.shuffle(randomProvider)
+    override fun getItems(): List<GameCard> {
+        val items = mutableListOf<GameCard>()
+
+        resources.forEachIndexed { index, it ->
+            items.add(GameCard(R.drawable.card_bg, it, index))
+            items.add(GameCard(R.drawable.card_bg, it, index))
+        }
+
+        return items.shuffled(randomProvider)
     }
-
-    override fun getItems(): List<GameCard> = items
-
-    fun getItemCount() = items.size
 }

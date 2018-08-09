@@ -16,5 +16,6 @@ interface GameCompleteContract {
 
     interface Callback {
         fun showHighscores()
+        fun dialogDismissed()
     }
 }

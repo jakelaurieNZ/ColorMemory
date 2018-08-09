@@ -13,19 +13,23 @@ import javax.inject.Inject
  * Presenter for the Gamefragment
  * Contains all game logic
  */
-class GamePresenter @Inject constructor(private val adapter: GameViewAdapter, dataProvider: IGameDataProvider):
+class GamePresenter @Inject constructor(private val adapter: GameViewAdapter,
+                                        private val dataProvider: IGameDataProvider):
         BasePresenter<GameContract.View>(), GameContract.Presenter {
 
-    private val data: List<GameCard> = dataProvider.getItems()
+    private var data: List<GameCard> = dataProvider.getItems()
     private val actionDelayTime = 1000L
     private var currentPoints = 0
     private var currentMatches = 0
     private lateinit var gameSubject: PublishSubject<Selection>
-    private var pairSize = 2
+    private val pairSize = 2
+
+    init {
+        adapter.data = data
+    }
 
     override fun resume() {
         super.resume()
-        adapter.data = data
         getView()?.setAdapter(adapter)
 
         gameSubject = PublishSubject.create()
@@ -113,6 +117,14 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter, da
     private fun onMatchFailure() {
         currentPoints -= 1
 
+        getView()?.onScoreChanged(currentPoints)
+    }
+
+    fun newGame() {
+        data = dataProvider.getItems()
+        adapter.data = data
+        currentMatches = 0
+        currentPoints = 0
         getView()?.onScoreChanged(currentPoints)
     }
 }

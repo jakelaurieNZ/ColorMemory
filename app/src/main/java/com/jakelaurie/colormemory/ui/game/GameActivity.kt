@@ -7,7 +7,7 @@ import com.jakelaurie.colormemory.ui.game.complete.GameCompleteContract
 import com.jakelaurie.colormemory.ui.game.complete.GameCompleteDialogFragment
 import com.jakelaurie.colormemory.ui.highscore.HighscoreFragment
 
-class GameActivity : BaseActivity(), GameContract.Callback, GameCompleteContract.Callback {
+class GameActivity : BaseActivity(), GameContract.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,11 +19,6 @@ class GameActivity : BaseActivity(), GameContract.Callback, GameCompleteContract
                 .beginTransaction()
                 .replace(android.R.id.content, GameFragment())
                 .commit()
-    }
-
-    override fun onGameComplete(points: Int) {
-        GameCompleteDialogFragment.newInstance(points)
-                .show(supportFragmentManager, GameCompleteDialogFragment::class.java.simpleName)
     }
 
     override fun showHighscores() {

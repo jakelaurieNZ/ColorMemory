@@ -1,5 +1,6 @@
 package com.jakelaurie.colormemory.ui.game.complete
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -85,8 +86,13 @@ class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.Vie
         getCallback()?.showHighscores()
     }
 
+    override fun onDismiss(dialog: DialogInterface?) {
+        super.onDismiss(dialog)
+        getCallback()?.dialogDismissed()
+    }
+
     private fun getCallback(): GameCompleteContract.Callback? {
-        return context as? GameCompleteContract.Callback
+        return targetFragment as? GameCompleteContract.Callback
     }
 
     override fun getPresenter(): BasePresenter<out BaseView>? = presenter
