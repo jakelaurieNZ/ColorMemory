@@ -36,6 +36,7 @@ ext {
     roomVersion =             "1.1.1"
     rxBindingsVersion =       "2.1.1"
     glideVersion =            "4.7.1"
+    coroutinesVersion =       "0.24.0"
 
     junitVersion =            "4.12"
     testRunnerVersion =       "1.0.2"

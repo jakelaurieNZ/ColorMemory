@@ -6,5 +6,5 @@ import com.jakelaurie.colormemory.model.Score
 
 @Database(entities = [Score::class], version = 1)
 abstract class Database : RoomDatabase() {
-    abstract fun serversDao(): ScoreDAO
+    abstract fun scoreDao(): ScoreDAO
 }

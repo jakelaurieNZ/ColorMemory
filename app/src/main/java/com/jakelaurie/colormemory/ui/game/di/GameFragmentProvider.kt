@@ -11,6 +11,6 @@ abstract class GameFragmentProvider {
     @ContributesAndroidInjector(modules = [GameModule::class])
     abstract fun providesGameFragment(): GameFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector()
     abstract fun providesGameCompleteDialogFragment(): GameCompleteDialogFragment
 }
