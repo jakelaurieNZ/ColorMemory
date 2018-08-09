@@ -1,12 +1,11 @@
 package com.jakelaurie.colormemory.ui.game
 
-import android.content.Intent
 import android.os.Bundle
 import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.base.BaseActivity
 import com.jakelaurie.colormemory.ui.game.complete.GameCompleteContract
 import com.jakelaurie.colormemory.ui.game.complete.GameCompleteDialogFragment
-import com.jakelaurie.colormemory.ui.highscore.HighscoreActivity
+import com.jakelaurie.colormemory.ui.highscore.HighscoreFragment
 
 class GameActivity : BaseActivity(), GameContract.Callback, GameCompleteContract.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +27,11 @@ class GameActivity : BaseActivity(), GameContract.Callback, GameCompleteContract
     }
 
     override fun showHighscores() {
-        startActivity(Intent(this, HighscoreActivity::class.java))
+        supportFragmentManager
+                .beginTransaction()
+                .addToBackStack(HighscoreFragment::javaClass.name)
+                .setCustomAnimations(R.anim.modal_up, R.anim.modal_down)
+                .add(android.R.id.content, HighscoreFragment())
+                .commit()
     }
 }

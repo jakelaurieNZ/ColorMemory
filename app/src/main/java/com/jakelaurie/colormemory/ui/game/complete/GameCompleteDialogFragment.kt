@@ -58,7 +58,6 @@ class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.Vie
             gameCompleteContinueButton.setText(R.string.game_complete_highscore_entered_button_title)
             gameCompleteContinueButton.setOnClickListener {
                 presenter.onNameEntered(gameCompleteEnterScoreInput.text.toString())
-                getCallback()?.showHighscores()
             }
         } else {
             gameCompleteTitle.setText(R.string.game_complete_title_standard)

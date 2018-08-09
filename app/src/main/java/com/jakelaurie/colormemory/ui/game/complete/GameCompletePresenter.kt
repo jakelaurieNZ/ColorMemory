@@ -32,15 +32,12 @@ class GameCompletePresenter @Inject constructor(val scoreDAO: ScoreDAO):
             score.playerName = value
             score.score = points
 
-            launch {
-                val query = async(CommonPool) { // Async stuff
-                    scoreDAO.addScore(score)
-                }
-
-                query.await()
-                getView()?.onHighscoreAdded()
+            async(CommonPool) {
+                scoreDAO.addScore(score)
             }
 
+            getView()?.dismiss()
+            getView()?.onHighscoreAdded()
         } else {
             getView()?.onNameError()
         }

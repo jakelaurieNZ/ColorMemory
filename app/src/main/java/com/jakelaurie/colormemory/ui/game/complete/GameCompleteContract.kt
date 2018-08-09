@@ -7,6 +7,7 @@ interface GameCompleteContract {
         fun displayPoints(points: Int, isHighScore: Boolean)
         fun onNameError()
         fun onHighscoreAdded()
+        fun dismiss()
     }
 
     interface Presenter {

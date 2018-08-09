@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="high_score_rank_title">Rank</string>
+    <string name="high_score_name_title">Name</string>
+    <string name="high_score_points_title">Points</string>
+</resources>
