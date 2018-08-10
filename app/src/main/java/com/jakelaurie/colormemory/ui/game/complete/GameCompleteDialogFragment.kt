@@ -9,6 +9,7 @@ import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.base.BaseView
 import com.jakelaurie.colormemory.ui.base.BaseDialogFragment
 import com.jakelaurie.colormemory.ui.base.BasePresenter
+import com.jakelaurie.colormemory.ui.base.IBasePresenter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_game_complete_dialog.*
@@ -16,7 +17,7 @@ import java.util.*
 import javax.inject.Inject
 
 class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.View {
-    @Inject lateinit var presenter: GameCompletePresenter
+    @Inject lateinit var presenter: GameCompleteContract.Presenter
 
     private var textChangedDisposable: Disposable? = null
 
@@ -30,7 +31,7 @@ class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.Vie
                 false)
 
         presenter.setView(this)
-        presenter.points = arguments?.getInt(kPoints)?: 0
+        presenter.setPoints(arguments?.getInt(kPoints)?: 0)
         return view
     }
 
@@ -95,7 +96,7 @@ class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.Vie
         return targetFragment as? GameCompleteContract.Callback
     }
 
-    override fun getPresenter(): BasePresenter<out BaseView>? = presenter
+    override fun getPresenter(): IBasePresenter<out BaseView>? = presenter
 
     companion object {
         const val kPoints = "kPoints"

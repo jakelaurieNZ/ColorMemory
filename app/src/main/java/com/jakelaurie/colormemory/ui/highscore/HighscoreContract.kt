@@ -1,6 +1,7 @@
 package com.jakelaurie.colormemory.ui.highscore
 
 import com.jakelaurie.colormemory.ui.base.BaseView
+import com.jakelaurie.colormemory.ui.base.IBasePresenter
 import com.jakelaurie.colormemory.ui.highscore.list.HighscoreAdapter
 
 class HighscoreContract {
@@ -8,7 +9,7 @@ class HighscoreContract {
         fun setAdapter(adapter: HighscoreAdapter)
     }
 
-    interface Presenter {
+    interface Presenter: IBasePresenter<View> {
 
     }
 

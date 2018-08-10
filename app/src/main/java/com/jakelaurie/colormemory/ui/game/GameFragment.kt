@@ -8,6 +8,7 @@ import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.base.BaseFragment
 import com.jakelaurie.colormemory.ui.base.BasePresenter
 import com.jakelaurie.colormemory.ui.base.BaseView
+import com.jakelaurie.colormemory.ui.base.IBasePresenter
 import com.jakelaurie.colormemory.ui.game.complete.GameCompleteContract
 import com.jakelaurie.colormemory.ui.game.complete.GameCompleteDialogFragment
 import kotlinx.android.synthetic.main.fragment_game.*
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 class GameFragment: BaseFragment(), GameContract.View, GameCompleteContract.Callback  {
 
-    @Inject lateinit var presenter: GamePresenter
+    @Inject lateinit var presenter: GameContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -57,5 +58,5 @@ class GameFragment: BaseFragment(), GameContract.View, GameCompleteContract.Call
         presenter.newGame()
     }
 
-    override fun getPresenter(): BasePresenter<out BaseView>? = presenter
+    override fun getPresenter(): IBasePresenter<out BaseView>? = presenter
 }

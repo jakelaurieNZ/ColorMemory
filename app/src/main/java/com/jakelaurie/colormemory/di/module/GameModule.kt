@@ -3,6 +3,8 @@ package com.jakelaurie.colormemory.di.module
 import android.content.Context
 import android.support.annotation.ArrayRes
 import com.jakelaurie.colormemory.R
+import com.jakelaurie.colormemory.ui.game.GameContract
+import com.jakelaurie.colormemory.ui.game.GamePresenter
 import com.jakelaurie.colormemory.ui.game.IGameDataProvider
 import com.jakelaurie.colormemory.ui.game.ResourceGameDataProvider
 import dagger.Module
@@ -30,5 +32,10 @@ class GameModule {
     @Named("CardsResource")
     fun provideCardsArray(): Int {
         return R.array.card_images_array
+    }
+
+    @Provides
+    fun providesGamePresenter(gamePresenter: GamePresenter): GameContract.Presenter {
+        return gamePresenter
     }
 }

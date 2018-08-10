@@ -1,6 +1,7 @@
 package com.jakelaurie.colormemory.ui.game.complete
 
 import com.jakelaurie.colormemory.ui.base.BaseView
+import com.jakelaurie.colormemory.ui.base.IBasePresenter
 
 interface GameCompleteContract {
     interface View: BaseView {
@@ -10,8 +11,9 @@ interface GameCompleteContract {
         fun dismiss()
     }
 
-    interface Presenter {
+    interface Presenter: IBasePresenter<View> {
         fun onNameEntered(value: String)
+        fun setPoints(points: Int)
     }
 
     interface Callback {

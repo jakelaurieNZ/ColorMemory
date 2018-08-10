@@ -1,6 +1,7 @@
 package com.jakelaurie.colormemory.ui.game
 
 import com.jakelaurie.colormemory.ui.base.BaseView
+import com.jakelaurie.colormemory.ui.base.IBasePresenter
 
 interface GameContract {
     interface View: BaseView {
@@ -9,8 +10,8 @@ interface GameContract {
         fun onGameCompleted(points: Int)
     }
 
-    interface Presenter {
-
+    interface Presenter: IBasePresenter<View> {
+        fun newGame()
     }
 
     interface Callback {

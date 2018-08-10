@@ -40,5 +40,5 @@ abstract class BaseFragment: Fragment(), HasSupportFragmentInjector, BaseView {
         return childFragmentInjector
     }
 
-    protected abstract fun getPresenter(): BasePresenter<out BaseView>?
+    protected abstract fun getPresenter(): IBasePresenter<out BaseView>?
 }

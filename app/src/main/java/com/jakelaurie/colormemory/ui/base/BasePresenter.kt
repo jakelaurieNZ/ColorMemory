@@ -16,17 +16,17 @@ abstract class BasePresenter<V: BaseView>: IBasePresenter<V> {
     }
 
     @CallSuper
-    open fun resume() {
+    override fun resume() {
         mIsPaused = false
     }
 
     @CallSuper
-    open fun pause() {
+    override fun pause() {
         mIsPaused = true
     }
 
     @CallSuper
-    open fun destroy() {
+    override fun destroy() {
         mIsPaused = true
     }
 
@@ -35,4 +35,7 @@ abstract class BasePresenter<V: BaseView>: IBasePresenter<V> {
 
 interface IBasePresenter<V: BaseView> {
     fun setView(view: V)
+    fun resume()
+    fun pause()
+    fun destroy()
 }

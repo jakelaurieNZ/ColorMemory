@@ -13,7 +13,7 @@ import javax.inject.Inject
 class GameCompletePresenter @Inject constructor(private val scoreDAO: ScoreDAO):
         BasePresenter<GameCompleteContract.View>(), GameCompleteContract.Presenter {
 
-    var points: Int = 0
+    var mPoints: Int = 0
 
     private var scoreObservable: DisposableObserver<List<Score>>? = null
 
@@ -27,13 +27,13 @@ class GameCompletePresenter @Inject constructor(private val scoreDAO: ScoreDAO):
 
             override fun onNext(it: List<Score>) {
                 if(!isPaused()) {
-                    calculateScore(points, it)
+                    calculateScore(mPoints, it)
                 }
             }
 
             override fun onError(e: Throwable) {
                 if(!isPaused()) {
-                    calculateScore(points, null)
+                    calculateScore(mPoints, null)
                 }
             }
         }
@@ -59,11 +59,15 @@ class GameCompletePresenter @Inject constructor(private val scoreDAO: ScoreDAO):
         }
     }
 
+    override fun setPoints(points: Int) {
+        mPoints = points
+    }
+
     override fun onNameEntered(value: String) {
         if(value.isNotEmpty()) {
             val score = Score(UUID.randomUUID().toString())
             score.playerName = value
-            score.score = points
+            score.score = mPoints
 
             launch(CommonPool) {
                 scoreDAO.addScore(score)

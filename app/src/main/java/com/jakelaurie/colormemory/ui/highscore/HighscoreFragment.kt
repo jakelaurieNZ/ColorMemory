@@ -9,6 +9,8 @@ import com.jakelaurie.colormemory.R
 import com.jakelaurie.colormemory.ui.base.BaseFragment
 import com.jakelaurie.colormemory.ui.base.BasePresenter
 import com.jakelaurie.colormemory.ui.base.BaseView
+import com.jakelaurie.colormemory.ui.base.IBasePresenter
+import com.jakelaurie.colormemory.ui.game.GameContract
 import com.jakelaurie.colormemory.ui.highscore.list.HighscoreAdapter
 import com.jakelaurie.colormemory.ui.widget.RecyclerItemDecoration
 import kotlinx.android.synthetic.main.fragment_high_score.*
@@ -16,7 +18,7 @@ import javax.inject.Inject
 
 class HighscoreFragment: BaseFragment(), HighscoreContract.View {
 
-    @Inject lateinit var presenter: HighscorePresenter
+    @Inject lateinit var presenter: HighscoreContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -42,5 +44,5 @@ class HighscoreFragment: BaseFragment(), HighscoreContract.View {
         highScoreRecyclerView.adapter = adapter
     }
 
-    override fun getPresenter(): BasePresenter<out BaseView>? = presenter
+    override fun getPresenter(): IBasePresenter<out BaseView>? = presenter
 }

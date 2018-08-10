@@ -41,5 +41,5 @@ abstract class BaseDialogFragment: DialogFragment(), HasSupportFragmentInjector,
         return childFragmentInjector
     }
 
-    protected abstract fun getPresenter(): BasePresenter<out BaseView>?
+    protected abstract fun getPresenter(): IBasePresenter<out BaseView>?
 }

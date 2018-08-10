@@ -120,7 +120,7 @@ class GamePresenter @Inject constructor(private val adapter: GameViewAdapter,
         getView()?.onScoreChanged(currentPoints)
     }
 
-    fun newGame() {
+    override fun newGame() {
         data = dataProvider.getItems()
         adapter.data = data
         currentMatches = 0
