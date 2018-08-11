@@ -10,7 +10,7 @@ import javax.inject.Inject
 class ResourceGameDataProvider @Inject constructor(
         context: Context,
         @ArrayRes drawableArray: Int,
-        private val randomProvider: Random): IGameDataProvider {
+        private val randomProvider: Random?): IGameDataProvider {
 
     private var resources: Array<Int> = emptyArray()
 
@@ -32,6 +32,10 @@ class ResourceGameDataProvider @Inject constructor(
             items.add(GameCard(R.drawable.card_bg, it, index))
         }
 
-        return items.shuffled(randomProvider)
+        randomProvider?.let {
+            return items.shuffled(randomProvider)
+        }
+
+        return items
     }
 }
