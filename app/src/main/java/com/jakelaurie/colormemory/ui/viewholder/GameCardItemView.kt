@@ -2,6 +2,7 @@ package com.jakelaurie.colormemory.ui.viewholder
 
 import android.animation.ObjectAnimator
 import android.graphics.drawable.Drawable
+import android.support.annotation.VisibleForTesting
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
@@ -15,7 +16,9 @@ typealias ClickListener = ((View, Int) -> Unit)
 
 class GameCardItemViewHolder(val itemView: View) {
     private var isSelected = false
-    private var currentId = -1
+
+    @VisibleForTesting
+    var currentId = -1
     private var actionBlocked = false
 
     init {

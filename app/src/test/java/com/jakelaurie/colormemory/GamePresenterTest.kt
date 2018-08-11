@@ -44,6 +44,4 @@ class GamePresenterTest {
         gamePresenter.newGame()
         Assert.assertEquals(scoreSet, 0)
     }
-
-
 }

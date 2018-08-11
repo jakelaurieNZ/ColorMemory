@@ -53,8 +53,10 @@ class GameCompletePresenter @Inject constructor(private val scoreDAO: ScoreDAO):
 
     private fun isHighScore(points: Int, scores: List<Score>?): Boolean {
         //If our score is higher than the last score, is high
-        return when(scores != null && scores.isNotEmpty()) {
-            true -> points > scores?.last()?.score?: 0
+        return when(scores != null && scores.isNotEmpty() && scores.size >= 10) {
+            true ->  {
+                points > scores?.last()?.score?: 0
+            }
             else -> true
         }
     }
