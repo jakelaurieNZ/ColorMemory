@@ -64,6 +64,7 @@ dependencies {
 
     //Test
     testImplementation "junit:junit:${rootProject.ext.junitVersion}"
+    testImplementation "org.mockito:mockito-inline:${rootProject.ext.mockitoVersion}"
 
     //AndroidTest
     androidTestImplementation "com.android.support.test:runner:${rootProject.ext.testRunnerVersion}"
