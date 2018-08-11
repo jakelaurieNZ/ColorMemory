@@ -8,17 +8,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * Presenter for the Gamefragment
  * Contains all game logic
  */
 class GamePresenter @Inject constructor(private val adapter: GameViewAdapter,
-                                        private val dataProvider: IGameDataProvider):
+                                        private val dataProvider: IGameDataProvider,
+                                        @Named("ActionDelayTime") private val actionDelayTime: Long):
         BasePresenter<GameContract.View>(), GameContract.Presenter {
 
     private var data: List<GameCard> = dataProvider.getItems()
-    private val actionDelayTime = 1000L
     private var currentPoints = 0
     private var currentMatches = 0
     private lateinit var gameSubject: PublishSubject<Selection>

@@ -38,4 +38,10 @@ class GameModule {
     fun providesGamePresenter(gamePresenter: GamePresenter): GameContract.Presenter {
         return gamePresenter
     }
+
+    @Provides
+    @Named("ActionDelayTime")
+    fun provideDelayTime(): Long {
+        return 1000L
+    }
 }
