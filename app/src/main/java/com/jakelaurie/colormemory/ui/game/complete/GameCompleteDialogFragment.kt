@@ -73,7 +73,7 @@ class GameCompleteDialogFragment: BaseDialogFragment(), GameCompleteContract.Vie
                 dismiss()
                 getCallback()?.showHighscores()
             }
-            gameCompleteEnterScoreLayout.visibility = View.GONE
+            gameCompleteEnterScoreLayout.visibility = View.VISIBLE
         }
     }
 
