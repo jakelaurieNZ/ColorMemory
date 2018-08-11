@@ -9,7 +9,8 @@ import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class HighscorePresenter @Inject constructor(private val adapter: HighscoreAdapter, private val scoreDao: ScoreDAO)
+class HighscorePresenter @Inject constructor(private val adapter: HighscoreAdapter,
+                                             private val scoreDao: ScoreDAO)
     : BasePresenter<HighscoreContract.View>(), HighscoreContract.Presenter {
 
     private var scoreObservable: DisposableObserver<List<Score>>? = null
